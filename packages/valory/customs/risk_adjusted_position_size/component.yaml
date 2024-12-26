@@ -1,0 +1,14 @@
+name: risk_adjusted_position_size
+author: 
+version: 0.1.0
+type: custom
+description: Strategy that bets risk-adjusted position size based on the trader's confidence level and risk tolerance
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeibbn67pn9iokmnrt5kbelvbs3v7fjlrjniywmwuy76trfcds3ertg
+  bet_amount_per_threshold.py: bafybeiho0v2yt54rtpuj6tyo4runchu74qf4nlxyq53pzuy5po0lkawe3
+fingerprint_ignore_patterns: []
+entry_point: risk_adjusted_position_size.py
+callable: run
+dependencies: {}
