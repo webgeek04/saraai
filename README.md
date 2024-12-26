@@ -271,3 +271,5 @@ Finally, if you are experienced with the [Open Autonomy](https://docs.autonolas.
 | packages/valory/customs/bet_amount_per_threshold |
 | packages/valory/customs/mike_strat |
 | packages/w1kke/customs/always_blue |
+| packages/valory/customs/risk_adjusted_bet_amount |
+| packages/valory/customs/risk_adjusted_position_size |
