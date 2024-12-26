@@ -1,3 +1,83 @@
+# Confidence-Based Trade Volume Strategy
+
+This strategy helps traders decide the volume of a trade based on their confidence level in the trade's success. It dynamically adjusts the trade size depending on the trader’s confidence, making it easier to scale trades in response to varying levels of certainty.
+
+## Features
+
+- **Dynamic Trade Volume**: Adjusts the trade size based on the trader's confidence level.
+- **Confidence Mapping**: Allows the trader to define specific trade volumes for different confidence levels.
+- **Error Handling**: Provides feedback if the required fields are missing or if an unrecognized confidence level is provided.
+
+## Required Fields
+
+### 1. `confidence`
+A float value between `0.0` and `1.0` representing the trader's confidence in the success of the trade.
+
+### 2. `volume_per_confidence`
+A dictionary that maps confidence levels (as strings) to specific trade volumes (as integers). Each key-value pair represents a confidence level and the corresponding trade volume.
+
+#### Example of `volume_per_confidence` dictionary:
+```python
+{
+    "0.0": 100,    # Trade volume for 0.0 confidence
+    "0.5": 200,    # Trade volume for 0.5 confidence
+    "0.7": 500,    # Trade volume for 0.7 confidence
+    "1.0": 1000    # Trade volume for 1.0 confidence
+}
+
+## Key Functionality:
+
+The trader provides a confidence level and a dictionary that maps confidence levels to trade volumes.
+The strategy checks the dictionary for the volume associated with the given confidence.
+If no match is found, it returns an error.
+
+
+# Confidence and Risk-Based Position Sizing Strategy
+
+This strategy helps traders dynamically adjust their position size based on both their **confidence level** in a trade and their **risk tolerance**. By factoring in both confidence and risk, the strategy enables traders to fine-tune their position size to match their belief in the trade's success and their willingness to take on risk.
+
+## Features
+
+- **Dynamic Position Sizing**: Adjusts the position size based on both confidence and risk tolerance.
+- **Confidence-Based Scaling**: Increases the position size when confidence is higher.
+- **Risk Tolerance Adjustment**: Scales the position size down if the trader has a lower risk tolerance.
+- **Risk Management**: Automatically reduces position size in trades where the trader has low confidence or low risk tolerance, helping to manage exposure.
+
+## Required Fields
+
+### 1. `confidence`
+A float value between `0.0` and `1.0` representing the trader's confidence in the trade's success. A higher confidence indicates a greater belief in the trade's success.
+
+### 2. `risk_tolerance`
+A float value between `0.0` and `1.0` representing the trader's risk tolerance. A value of `0.0` means no risk is acceptable, and `1.0` represents the maximum risk the trader is willing to take.
+
+### 3. `base_position_size`
+A float representing the base position size or the normal position size the trader would use without any adjustments. This is the reference size before factoring in confidence and risk tolerance.
+
+## Process
+
+1. **Confidence & Risk Adjustment**:
+   - The position size is calculated by multiplying the base position size by the product of the trader’s confidence and risk tolerance.
+   - If the confidence is low, the position size will be reduced.
+   - If the risk tolerance is low, the position size will be reduced further.
+   
+2. **Result**:
+   - The outcome is an **adjusted position size** that scales according to both confidence and risk tolerance.
+
+### Example Calculation
+
+If a trader has the following inputs:
+- `base_position_size`: 100 units
+- `confidence`: 0.8
+- `risk_tolerance`: 0.5
+
+The **adjusted position size** is calculated as:
+
+```python
+adjusted_position_size = base_position_size * (confidence * risk_tolerance)
+adjusted_position_size = 100 * (0.8 * 0.5) = 100 * 0.4 = 40 units
+
+
 ## Trader service
 
 Trader is an autonomous service that performs **bets on existing prediction markets**. The service interacts with an [AI Mech](https://github.com/valory-xyz/mech) (a service that executes AI tasks), and its workflow is as follows:
