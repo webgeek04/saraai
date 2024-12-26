@@ -1,0 +1,14 @@
+name: risk_adjusted_bet_amount
+author: 
+version: 0.1.0
+type: custom
+description: Strategy that bets risk-adjusted bet amounts based on bankroll, win probability, and risk tolerance
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeibbn67pnrrm4qm3n3kbelvbsij7yrlrjniywmw2vbizaripu6yghe
+  bet_amount_per_threshold.py: bafybeih7kv24wtfotp3rskyoy6hgthu74qf4nlxyq53pzuy5qo0i64rftg
+fingerprint_ignore_patterns: []
+entry_point: risk_adjusted_bet_amount.py
+callable: run
+dependencies: {}
